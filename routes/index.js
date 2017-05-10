@@ -13,13 +13,11 @@ router.get('/', function (req, res) {
     })
 })
 
-
 router.get('/user/:id', function (req, res) {
-  var id = req.params.id
-  var connection = req.app.get('connection')
-  db.getUser(id, connection)
-    .then( (profiles) => {
-      res.render('user', profiles[0])
+  db.getUser(req.params.id, req.app.get('connection'))
+    .first()
+    .then( (profile) => {
+      res.render('user', profile)
     })
     .catch(function (err) {
       res.status(500).send('DATABASE ERROR: ' + err.message)

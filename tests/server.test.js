@@ -12,8 +12,17 @@ test('GET /', (t) => {
     .get('/')
     .expect(200)
     .then((res) => {
-      const $ = cheerio.load(res.text)
-      //t.is($('li').first().text(), 'Ambitious Aardvark (aardvark@example.org)')
+      t.true(res.text.indexOf('Aardvark') > -1)
+    })
+})
+
+test('GET /user/:id', (t) => {
+  return request(t.context.app)
+    .get('/user/99902')
+    .expect(200)
+    .then((res) => {
+      t.true(res.text.indexOf('Baboon') > -1)
+      t.is(res.text.indexOf('Aardvark'), -1)
     })
 })
 
