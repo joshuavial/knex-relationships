@@ -37,9 +37,23 @@ router.post('/', function (req, res) {
     .catch(function (err) {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })
-
-  // console.log(newdata);
   res.redirect('/')
+})
+
+router.get('/delete/:id', function (req, res) {
+  var id = req.params.id
+  var connection = req.app.get('connection')
+  db.deleteUser(id, connection)
+    .then(() => {
+      return db.deleteProfile(id, connection)
+    })
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch(function (err) {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+
 })
 
 

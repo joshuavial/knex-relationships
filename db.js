@@ -3,7 +3,9 @@ module.exports = {
   getUser: getUser,
   getUsers: getUsers,
   updateUser: updateUser,
-  updateProfile: updateProfile
+  updateProfile: updateProfile,
+  deleteUser: deleteUser,
+  deleteProfile: deleteProfile
 }
 
 function getUsers (connection) {
@@ -33,4 +35,17 @@ function updateProfile (newdata, connection, user_id) {
     }
   return connection('profiles')
     .insert(profilesData)
+}
+
+function deleteUser (id, connection) {
+  return connection('users')
+  .where('users.id', id)
+  .del()
+}
+
+function deleteProfile (id, connection) {
+  console.log(id);
+  return connection('profiles')
+  .where('profiles.users_id', id)
+  .del()
 }
