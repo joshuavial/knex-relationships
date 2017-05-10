@@ -26,3 +26,13 @@ test('GET /user/:id', (t) => {
     })
 })
 
+test('GET /user/new', (t) => {
+  return request(t.context.app)
+    .get('/user/new')
+    .expect(200)
+    .then((res) => {
+      let $ = cheerio.load(res.text)
+      t.is($('form').length, 1)
+    })
+})
+

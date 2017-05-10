@@ -13,6 +13,10 @@ router.get('/', function (req, res) {
     })
 })
 
+router.get('/user/new', (req, res) => {
+  res.render('new')
+})
+
 router.get('/user/:id', function (req, res) {
   db.getUser(req.params.id, req.app.get('connection'))
     .first()
