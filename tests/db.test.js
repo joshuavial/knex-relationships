@@ -11,11 +11,11 @@ var db = require('../db')
 
 test('getUsers gets all users', function (t) {
   // One for each letter of the alphabet!
-  var expected = 26
+  var expected = 11
   return db.getUsers(t.context.connection)
     .then(function (result) {
       var actual = result.length
-      t.is(expected, actual)
+      t.is(actual, expected)
     })
 })
 
