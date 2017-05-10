@@ -9,5 +9,17 @@
       <li><a href="/user/{{id}}">{{name}}</a> ({{email}})</li>
     {{/each}}
     </ul>
+
+    <form class="" action="/" method="post" autocomplete="off">
+      <label for="UserName">User Name</label>
+      <input type="text" name="UserName" placeholder="User Name"><br><br>
+      <label for="email">E-Mail</label>
+      <input type="text" name="email" placeholder="E-Mail"><br><br>
+      <label for="url">User Website</label>
+      <input type="text" name="url" placeholder="User Website"><br><br>
+      <label for="image_url">Profile Picture</label>
+      <input type="text" name="image_url" placeholder="Profile Picture"><br><br>
+      <input type="submit" name="AddUser" value="Add">
+    </form>
   </body>
 </html>
