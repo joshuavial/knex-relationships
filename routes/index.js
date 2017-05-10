@@ -28,12 +28,21 @@ router.get('/user/:id', function (req, res) {
     })
 })
 
+router.post('/users', (req, res) => {
+  db.addUser(req.body, req.app.get('connection'))
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch(function (err) {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
 router.post('/', function (req, res) {
   var newdata = req.body
   var connection = req.app.get('connection')
   db.updateUser(newdata, connection)
     .then((user) => {
-      console.log(user);
       db.updateProfile(newdata, connection, user[0])
     })
     .catch(function (err) {

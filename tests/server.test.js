@@ -36,3 +36,26 @@ test('GET /user/new', (t) => {
     })
 })
 
+
+test('POST /users', (t) => {
+  return request(t.context.app)
+    .post('/users')
+    .send({
+      name: 'bob',
+      email: 'bob@email.com',
+      url: 'my-url',
+      image_url: 'image-url'
+    })
+    .expect(302)
+    .then((res) => {
+      return t.context.connection('users').select()
+    })
+    .then((users) => {
+      t.is(users.length, 12)
+      return t.context.connection('profiles').select()
+    })
+    .then((profiles) => {
+      t.is(profiles.length, 12)
+    })
+
+})
